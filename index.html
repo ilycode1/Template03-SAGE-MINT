@@ -1,0 +1,2705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SD Nusantara Bangsa - Membentuk Generasi Cerdas, Berkarakter, dan Berprestasi" />
+  <title>SD Nusantara Bangsa | Membentuk Generasi Cerdas</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS — external full stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Critical CSS embed: tokens + new effects (prevents FOUC) -->
+  <style>
+    /* =============================================
+       DESIGN TOKENS (critical — inline for instant render)
+    ============================================= */
+    :root {
+      --primary:      #3a8f6f;
+      --secondary:    #5bb89a;
+      --accent:       #ff9f43;
+      --bg:           #ffffff;
+      --surface:      #edfaf4;
+      --text:         #2c3e35;
+      --text-muted:   #5a7a6e;
+      --white:      #ffffff;
+      --gray-100:   #f8f9fa;
+      --gray-200:   #e9ecef;
+      --gray-400:   #adb5bd;
+      --shadow-sm:  0 2px 8px rgba(58,143,111,.08);
+      --shadow-md:  0 8px 24px rgba(58,143,111,.15);
+      --shadow-lg:  0 16px 48px rgba(58,143,111,.20);
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --radius-xl:  32px;
+      --font-heading: 'Nunito', sans-serif;
+      --font-body:    'Nunito Sans', sans-serif;
+      --transition:   0.3s ease;
+      --navbar-h:     72px;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); line-height: 1.2; }
+
+    img { display: block; max-width: 100%; }
+
+    a { color: inherit; text-decoration: none; }
+
+    ul { list-style: none; }
+
+    address { font-style: normal; }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* =============================================
+       LAYOUT HELPERS
+    ============================================= */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 5rem 0; }
+    section:nth-of-type(even) { background: var(--surface); }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: .4rem;
+    }
+
+    .section-subtitle {
+      color: var(--gray-400);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary  { background: var(--primary); color: var(--white); border-color: var(--primary); }
+    .btn-primary:hover  { background: #2d7358; border-color: #2d7358; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline  { background: transparent; color: var(--white); border-color: var(--white); }
+    .btn-outline:hover  { background: var(--white); color: var(--primary); }
+    .btn-accent   { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-accent:hover   { background: #e8893a; transform: translateY(-2px); }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(58,143,111,.1);
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--navbar-h);
+      gap: 1rem;
+    }
+
+    .navbar__brand {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .navbar__logo { border-radius: var(--radius-sm); }
+    .navbar__school-main { display: block; font-family: var(--font-heading); font-weight: 800; font-size: 1rem; color: var(--primary); }
+    .navbar__school-sub  { display: block; font-size: .7rem; color: var(--gray-400); }
+
+    .navbar__links {
+      display: flex; align-items: center; gap: .25rem;
+    }
+    .navbar__link {
+      padding: .45rem .85rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: .875rem;
+      color: var(--text);
+      transition: var(--transition);
+    }
+    .navbar__link:hover,
+    .navbar__link.active { color: var(--primary); background: var(--surface); }
+    .navbar__link--cta {
+      background: var(--primary); color: var(--white);
+      border-radius: var(--radius-lg);
+    }
+    .navbar__link--cta:hover { background: #2d7358; color: var(--white); }
+
+    .navbar__hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      padding: .5rem; font-size: 1.4rem; color: var(--primary);
+      line-height: 1;
+    }
+    .hamburger__icon--close { display: none; }
+    .navbar__hamburger[aria-expanded="true"] .hamburger__icon--open  { display: none; }
+    .navbar__hamburger[aria-expanded="true"] .hamburger__icon--close { display: inline; }
+
+    .navbar__mobile {
+      display: none;
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--surface);
+    }
+    .navbar__mobile.open { display: block; }
+    .navbar__mobile-link {
+      display: block;
+      padding: .65rem 0;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--surface);
+      transition: color var(--transition);
+    }
+    .navbar__mobile-link:hover { color: var(--primary); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero { padding: 0; }
+    .hero {
+      position: relative;
+      height: 100vh; min-height: 560px;
+      overflow: hidden;
+    }
+
+    .hero__slides, .hero__slide { position: absolute; inset: 0; }
+    .hero__slide { opacity: 0; transition: opacity .8s ease; }
+    .hero__slide--active { opacity: 1; }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; }
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(58,143,111,.75) 0%, rgba(44,62,53,.6) 100%);
+    }
+
+    .hero__content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center;
+      padding-top: var(--navbar-h);
+      color: var(--white);
+      animation: heroFadeIn .9s ease both;
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__label {
+      font-size: .85rem; letter-spacing: .1em; text-transform: uppercase;
+      font-family: var(--font-heading); font-weight: 700;
+      opacity: .85; margin-bottom: .5rem;
+    }
+    .hero__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: .75rem;
+    }
+    .hero__tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      opacity: .9; margin-bottom: 2rem;
+      max-width: 540px;
+    }
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero__nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.2); backdrop-filter: blur(4px);
+      border: none; color: var(--white);
+      width: 48px; height: 48px; border-radius: 50%;
+      font-size: 1rem; cursor: pointer;
+      transition: background var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero__nav:hover { background: rgba(255,255,255,.4); }
+    .hero__nav--prev { left: 1.5rem; }
+    .hero__nav--next { right: 1.5rem; }
+
+    .hero__dots {
+      position: absolute; bottom: 5rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: .5rem;
+    }
+    .hero__dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,.45); border: none; cursor: pointer;
+      transition: var(--transition); padding: 0;
+    }
+    .hero__dot--active { background: var(--white); transform: scale(1.3); }
+
+    .hero__wave {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      line-height: 0;
+    }
+    .hero__wave svg { width: 100%; height: 60px; display: block; }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    .about__history {
+      background: var(--white);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 1.025rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about__vm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .about__vm-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.1);
+    }
+    .about__vm-icon {
+      width: 52px; height: 52px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .about__vm-card h3 {
+      color: var(--primary); font-size: 1.1rem; font-weight: 800;
+      margin-bottom: .75rem;
+    }
+    .about__vm-card ul { padding-left: 1rem; list-style: disc; }
+    .about__vm-card ul li { margin-bottom: .35rem; font-size: .925rem; }
+
+    .about__principal {
+      display: flex; gap: 2rem; align-items: center;
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 2rem; box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.1);
+    }
+    .about__principal-photo {
+      border-radius: 50%;
+      border: 4px solid var(--surface);
+      flex-shrink: 0;
+    }
+    .about__quote {
+      border-left: 4px solid var(--accent);
+      padding-left: 1.25rem;
+    }
+    .about__quote p {
+      font-size: 1.025rem; font-style: italic;
+      color: var(--text); margin-bottom: .75rem;
+    }
+    .about__quote footer strong { display: block; color: var(--primary); font-family: var(--font-heading); }
+    .about__quote footer span  { font-size: .875rem; color: var(--gray-400); }
+
+    /* =============================================
+       STATS
+    ============================================= */
+    #stats { background: var(--primary); }
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .stats__item {
+      text-align: center; color: var(--white);
+      padding: 1.5rem 1rem;
+      background: rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+    }
+    .stats__icon { font-size: 2rem; margin-bottom: .5rem; opacity: .85; }
+    .stats__number {
+      display: block;
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1;
+      margin-bottom: .35rem;
+    }
+    .stats__label { font-size: .875rem; opacity: .85; }
+
+    .stats__accreditation {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .75rem; color: var(--white);
+    }
+    .stats__badge {
+      width: 80px; height: 80px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .stats__badge-grade { font-family: var(--font-heading); font-weight: 800; font-size: 2rem; color: var(--white); }
+    .stats__badge-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: var(--white); opacity: .85; }
+    .stats__stars { color: var(--accent); font-size: 1.25rem; }
+    .stats__accreditation > p { font-family: var(--font-heading); font-weight: 600; opacity: .9; }
+
+    /* =============================================
+       FACILITIES
+    ============================================= */
+    .facilities__cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .facilities__card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.08);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .facilities__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .facilities__card-icon {
+      width: 52px; height: 52px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .facilities__card h3 {
+      font-size: 1rem; font-weight: 800;
+      color: var(--primary); margin-bottom: .5rem;
+    }
+    .facilities__card p { font-size: .9rem; color: var(--gray-400); }
+
+    .facilities__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .facilities__photo {
+      position: relative; border-radius: var(--radius-md);
+      overflow: hidden; aspect-ratio: 4/3;
+    }
+    .facilities__photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .facilities__photo:hover img { transform: scale(1.08); }
+    .facilities__photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,62,53,.7) 0%, transparent 60%);
+      display: flex; align-items: flex-end; padding: 1rem;
+      color: var(--white);
+    }
+    .facilities__photo-overlay span { font-family: var(--font-heading); font-weight: 700; }
+
+    /* =============================================
+       ORGANIZATION
+    ============================================= */
+    .org__chart {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0;
+    }
+    .org__level {
+      display: flex; gap: 1.5rem; justify-content: center;
+    }
+    .org__level--multi { flex-wrap: wrap; }
+
+    .org__node {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .4rem; text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid rgba(58,143,111,.1);
+      min-width: 160px;
+      transition: box-shadow var(--transition);
+    }
+    .org__node:hover { box-shadow: var(--shadow-md); }
+    .org__node img { border-radius: 50%; border: 3px solid var(--surface); }
+    .org__node strong { font-family: var(--font-heading); font-size: .9rem; color: var(--primary); }
+    .org__node span   { font-size: .775rem; color: var(--gray-400); }
+    .org__node--principal { border-color: var(--primary); }
+    .org__node--principal strong { font-size: 1rem; }
+
+    .org__connector {
+      width: 2px; height: 2rem;
+      background: var(--secondary); margin: 0 auto;
+    }
+
+    /* =============================================
+       TEACHERS
+    ============================================= */
+    .teachers__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .teacher__card {
+      position: relative;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .teacher__front,
+    .teacher__back {
+      position: absolute; inset: 0;
+      border-radius: var(--radius-lg);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform .6s ease;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .teacher__front {
+      background: var(--white);
+      border: 1px solid rgba(58,143,111,.1);
+    }
+    .teacher__front img {
+      width: 100px; height: 100px; border-radius: 50%;
+      object-fit: cover; margin-bottom: .75rem;
+      border: 3px solid var(--surface);
+    }
+    .teacher__front h3 {
+      font-size: .9rem; font-weight: 800;
+      color: var(--primary); margin-bottom: .25rem;
+    }
+    .teacher__back {
+      background: var(--primary);
+      color: var(--white);
+      transform: rotateY(180deg);
+      gap: .6rem;
+    }
+    .teacher__back i { opacity: .85; }
+    .teacher__back h3 { font-size: .95rem; font-weight: 800; }
+    .teacher__back p  { font-size: .82rem; opacity: .9; line-height: 1.45; }
+
+    .teacher__card:hover .teacher__front { transform: rotateY(180deg); }
+    .teacher__card:hover .teacher__back  { transform: rotateY(0deg); }
+
+    .teacher__subject {
+      display: inline-block;
+      background: var(--surface);
+      color: var(--primary);
+      font-size: .75rem; font-weight: 700;
+      padding: .2rem .65rem;
+      border-radius: var(--radius-lg);
+    }
+    .teacher__back .teacher__subject {
+      background: rgba(255,255,255,.2);
+      color: var(--white);
+    }
+
+    /* =============================================
+       STUDENT AFFAIRS — TABS
+    ============================================= */
+    .tabs {
+      display: flex; gap: .5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .tab {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .6rem 1.25rem;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-heading); font-weight: 700; font-size: .875rem;
+      border: 2px solid rgba(58,143,111,.2);
+      background: transparent; color: var(--text);
+      cursor: pointer; transition: var(--transition);
+    }
+    .tab:hover    { border-color: var(--primary); color: var(--primary); }
+    .tab--active  { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    .tab-content { display: none; animation: tabFadeIn .35s ease; }
+    .tab-content--active { display: block; }
+    @keyframes tabFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .tab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .tab-item {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.08);
+    }
+    .tab-item i { color: var(--primary); margin-bottom: .75rem; }
+    .tab-item h4 { font-size: .95rem; font-weight: 800; color: var(--primary); margin-bottom: .35rem; }
+    .tab-item p  { font-size: .85rem; color: var(--gray-400); }
+
+    /* =============================================
+       ACHIEVEMENTS — TIMELINE
+    ============================================= */
+    .timeline {
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+      max-width: 700px; margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 32px; top: 0; bottom: 0;
+      width: 2px; background: var(--secondary);
+    }
+    .timeline__item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding-bottom: 1.75rem;
+    }
+    .timeline__badge {
+      width: 64px; height: 64px; flex-shrink: 0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; z-index: 1;
+      border: 3px solid var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .timeline__item--gold   .timeline__badge { background: #ffd700; color: #7a5800; }
+    .timeline__item--silver .timeline__badge { background: #c0c0c0; color: #5a5a5a; }
+    .timeline__item--bronze .timeline__badge { background: #cd7f32; color: #fff; }
+
+    .timeline__content {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-sm);
+      flex: 1;
+      border: 1px solid rgba(58,143,111,.08);
+    }
+    .timeline__year {
+      font-size: .75rem; font-weight: 800; letter-spacing: .06em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .timeline__content h4 {
+      font-size: .975rem; font-weight: 800;
+      color: var(--primary); margin: .2rem 0 .5rem;
+    }
+    .timeline__level {
+      display: inline-block; font-size: .75rem; font-weight: 700;
+      padding: .15rem .6rem; border-radius: var(--radius-lg);
+    }
+    .timeline__level--national { background: #ffecd2; color: #b45309; }
+    .timeline__level--province { background: #e0f2fe; color: #0369a1; }
+    .timeline__level--city     { background: var(--surface); color: var(--primary); }
+
+    /* =============================================
+       NEWS
+    ============================================= */
+    .news__layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .news__cards { display: flex; flex-direction: column; gap: 1.5rem; }
+    .news__card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.08);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      transition: box-shadow var(--transition);
+    }
+    .news__card:hover { box-shadow: var(--shadow-md); }
+    .news__card img { width: 100%; height: 100%; object-fit: cover; }
+    .news__card-body { padding: 1.25rem; }
+    .news__date { font-size: .775rem; color: var(--gray-400); margin-bottom: .35rem; display: block; }
+    .news__title { font-size: .975rem; font-weight: 800; color: var(--primary); margin-bottom: .5rem; line-height: 1.3; }
+    .news__title a:hover { text-decoration: underline; }
+    .news__excerpt { font-size: .875rem; color: var(--text); opacity: .8; }
+
+    .news__sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .news__announcements,
+    .news__calendar {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.08);
+    }
+    .news__announcements h3,
+    .news__calendar h3 {
+      font-size: 1rem; font-weight: 800; color: var(--primary);
+      margin-bottom: 1rem; display: flex; gap: .5rem; align-items: center;
+    }
+    .news__announcements ul { display: flex; flex-direction: column; gap: .85rem; }
+    .news__announcements li {
+      display: flex; flex-direction: column; gap: .2rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--surface);
+      font-size: .875rem;
+    }
+    .news__announcements li:last-child { border-bottom: none; padding-bottom: 0; }
+    .news__announcements a { color: var(--text); }
+    .news__announcements a:hover { color: var(--primary); }
+    .news__announcements time { font-size: .75rem; color: var(--gray-400); }
+
+    .badge {
+      display: inline-block;
+      font-size: .65rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: .1rem .45rem; border-radius: var(--radius-sm);
+    }
+    .badge--new { background: var(--accent); color: var(--white); }
+
+    .news__calendar table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    .news__calendar th { text-align: left; font-size: .75rem; font-weight: 700; color: var(--gray-400); padding: .4rem .5rem; border-bottom: 2px solid var(--surface); }
+    .news__calendar td { padding: .55rem .5rem; border-bottom: 1px solid var(--surface); }
+    .news__calendar tr:hover td { background: var(--surface); }
+
+    /* =============================================
+       GALLERY
+    ============================================= */
+    .gallery__grid {
+      columns: 3 280px;
+      gap: 1rem;
+    }
+    .gallery__item {
+      position: relative; border-radius: var(--radius-md);
+      overflow: hidden; break-inside: avoid;
+      margin-bottom: 1rem; cursor: pointer;
+    }
+    .gallery__item img { width: 100%; display: block; transition: transform .5s ease; }
+    .gallery__item:hover img { transform: scale(1.06); }
+    .gallery__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,62,53,.7) 0%, transparent 55%);
+      display: flex; align-items: flex-end; padding: 1rem;
+      color: var(--white);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .gallery__item:hover .gallery__overlay { opacity: 1; }
+    .gallery__overlay span { font-family: var(--font-heading); font-weight: 700; font-size: .9rem; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.9);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox[hidden] { display: none; }
+    .lightbox__img { max-width: 90vw; max-height: 80vh; border-radius: var(--radius-md); object-fit: contain; }
+    .lightbox__caption { color: var(--white); margin-top: 1rem; font-family: var(--font-heading); font-size: 1rem; }
+    .lightbox__close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: rgba(255,255,255,.1); border: none;
+      color: var(--white); width: 44px; height: 44px;
+      border-radius: 50%; font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .lightbox__close:hover { background: rgba(255,255,255,.25); }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    .testimonials__carousel { position: relative; overflow: hidden; }
+    .testimonials__track {
+      display: flex;
+      transition: transform .5s ease;
+    }
+    .testimonial__card {
+      min-width: 100%; padding: 0 .5rem;
+    }
+    .testimonial__card blockquote {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      max-width: 640px; margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .testimonial__card blockquote > i {
+      color: var(--accent); font-size: 2rem;
+      opacity: .4; margin-bottom: 1rem;
+    }
+    .testimonial__card blockquote p { font-size: 1.025rem; font-style: italic; margin-bottom: 1.5rem; }
+    .testimonial__card blockquote footer {
+      display: flex; align-items: center;
+      justify-content: center; gap: 1rem;
+    }
+    .testimonial__card footer img {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 3px solid var(--surface);
+    }
+    .testimonial__card footer div { text-align: left; }
+    .testimonial__card footer strong { display: block; font-family: var(--font-heading); color: var(--primary); }
+    .testimonial__card footer span  { font-size: .85rem; color: var(--gray-400); }
+
+    .testimonials__dots {
+      display: flex; justify-content: center; gap: .5rem;
+      margin-top: 1.5rem;
+    }
+    .testimonials__dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gray-200); border: none; cursor: pointer;
+      transition: var(--transition); padding: 0;
+    }
+    .testimonials__dot--active { background: var(--primary); transform: scale(1.3); }
+
+    /* =============================================
+       LOCATION
+    ============================================= */
+    .location__layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem; align-items: start;
+    }
+    .location__map { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); }
+    .location__info {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .location__address,
+    .location__hours {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(58,143,111,.08);
+    }
+    .location__address h3,
+    .location__hours h3 {
+      font-size: 1rem; font-weight: 800; color: var(--primary);
+      margin-bottom: .85rem; display: flex; gap: .5rem; align-items: center;
+    }
+    .location__address address { font-size: .95rem; line-height: 1.7; }
+    .location__hours table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    .location__hours td { padding: .45rem 0; border-bottom: 1px solid var(--surface); }
+    .location__hours td:last-child { text-align: right; font-weight: 600; color: var(--primary); }
+    .location__hours tr:last-child td { border-bottom: none; }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    .contact__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem; align-items: start;
+    }
+    .contact__wa {
+      display: flex; align-items: center; gap: 1rem;
+      background: #25d366; color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-heading);
+      font-size: 1.75rem; font-weight: 800;
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+    }
+    .contact__wa div { display: flex; flex-direction: column; gap: .15rem; }
+    .contact__wa div span  { font-size: .8rem; opacity: .85; font-weight: 600; }
+    .contact__wa div strong { font-size: 1rem; }
+    .contact__wa:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,211,102,.35); }
+
+    .contact__details { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.5rem; }
+    .contact__details li {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .95rem;
+    }
+    .contact__details li i { color: var(--primary); width: 20px; text-align: center; }
+    .contact__details a:hover { color: var(--primary); }
+
+    .contact__socials { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+    .social-link {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .social-link:hover { background: var(--primary); color: var(--white); transform: translateY(-3px); }
+
+    .contact__form-wrap {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(58,143,111,.1);
+    }
+    .contact__form h3 {
+      font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem;
+    }
+    .form__group { margin-bottom: 1.1rem; }
+    .form__group label {
+      display: block; font-family: var(--font-heading); font-weight: 700;
+      font-size: .875rem; margin-bottom: .4rem; color: var(--text);
+    }
+    .form__group input,
+    .form__group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body); font-size: .95rem;
+      color: var(--text);
+      transition: border-color var(--transition);
+      background: var(--white);
+      resize: vertical;
+    }
+    .form__group input:focus,
+    .form__group textarea:focus {
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(58,143,111,.1);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    #footer { background: var(--text); color: rgba(255,255,255,.75); }
+    .footer__main { padding: 4rem 0 2rem; }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 2.5rem;
+    }
+    .footer__brand .footer__logo-link {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .footer__brand .footer__logo-link img { border-radius: var(--radius-sm); }
+    .footer__brand .footer__logo-link span {
+      font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem;
+    }
+    .footer__brand p {
+      font-size: .875rem; line-height: 1.65; margin-bottom: 1rem;
+    }
+    .footer__brand address { font-size: .875rem; display: flex; gap: .5rem; align-items: flex-start; }
+    .footer__brand address i { color: var(--accent); margin-top: .25rem; }
+
+    .footer__links h4,
+    .footer__programs h4,
+    .footer__social h4 {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: .875rem; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .footer__links ul li,
+    .footer__programs ul li { margin-bottom: .5rem; }
+    .footer__links a,
+    .footer__programs a {
+      font-size: .875rem; color: rgba(255,255,255,.65);
+      transition: color var(--transition);
+    }
+    .footer__links a:hover,
+    .footer__programs a:hover { color: var(--white); }
+
+    .footer__social-links { display: flex; gap: .65rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .footer__social .social-link {
+      background: rgba(255,255,255,.1); color: var(--white);
+    }
+    .footer__social .social-link:hover { background: var(--primary); }
+
+    .footer__contact-quick { display: flex; flex-direction: column; gap: .6rem; }
+    .footer__contact-quick a {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .85rem; color: rgba(255,255,255,.65);
+      transition: color var(--transition);
+    }
+    .footer__contact-quick a:hover { color: var(--white); }
+    .footer__contact-quick i { color: var(--accent); width: 16px; }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 1.25rem 0;
+    }
+    .footer__bottom-inner {
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 1rem;
+      flex-wrap: wrap;
+      font-size: .825rem;
+    }
+    .footer__bottom-inner strong { color: var(--accent); }
+
+    /* =============================================
+       BACK TO TOP
+    ============================================= */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+    .back-to-top:hover { background: #2d7358; transform: translateY(-3px); }
+    .back-to-top[hidden] { display: none; }
+
+    /* =============================================
+       FOCUS INDICATOR (Accessibility)
+    ============================================= */
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .news__layout     { grid-template-columns: 1fr; }
+      .location__layout { grid-template-columns: 1fr; }
+      .footer__grid     { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 3.5rem 0; }
+
+      .navbar__links    { display: none; }
+      .navbar__hamburger { display: flex; align-items: center; justify-content: center; }
+
+      .about__principal { flex-direction: column; text-align: center; }
+      .about__principal-photo { align-self: center; }
+      .about__quote { border-left: none; border-top: 4px solid var(--accent); padding: 1rem 0 0; }
+
+      .contact__layout  { grid-template-columns: 1fr; }
+      .news__card       { grid-template-columns: 1fr; }
+      .news__card img   { height: 180px; }
+
+      .org__level--multi { gap: 1rem; }
+      .org__node { min-width: 120px; padding: .75rem 1rem; }
+
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__bottom-inner { flex-direction: column; text-align: center; }
+
+      .gallery__grid { columns: 2 200px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__content { align-items: center; text-align: center; }
+      .hero__actions { justify-content: center; }
+      .stats__grid   { grid-template-columns: 1fr 1fr; }
+      .teachers__grid { grid-template-columns: 1fr 1fr; }
+      .gallery__grid  { columns: 1; }
+    }
+
+    /* =============================================
+       EFFECTS — embedded from css-prompt.json
+       (duplicated here as critical inline CSS so
+        effects work even before style.css loads)
+    ============================================= */
+
+    /* Card 3D Tilt — JS data-tilt rotates ±8deg */
+    .card-3d {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform .3s ease, box-shadow .3s ease;
+      will-change: transform;
+    }
+    .card-3d .card-3d__inner {
+      transform: translateZ(12px);
+      transition: transform .3s ease;
+    }
+
+    /* Floating animations — 3 speed variants */
+    @keyframes float      { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+    @keyframes float-slow { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-14px) rotate(-4deg)} }
+    @keyframes float-fast { 0%,100%{transform:translateY(0) scale(1)}     50%{transform:translateY(-10px) scale(1.04)} }
+
+    .floating       { animation: float 5s ease-in-out infinite; will-change: transform; }
+    .floating--slow { animation: float-slow 7s ease-in-out infinite; will-change: transform; }
+    .floating--fast { animation: float-fast 3s ease-in-out infinite; will-change: transform; }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 24px;
+    }
+    @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+      .glass {
+        background: rgba(255,255,255,.15);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+    }
+
+    /* Hero parallax layers */
+    .hero-layer           { position: absolute; will-change: transform; pointer-events: none; }
+    .hero-layer--back     { z-index: 1; }
+    .hero-layer--mid      { z-index: 2; }
+    .hero-layer--front    { z-index: 3; }
+
+    /* Scroll reveal — JS adds .is-visible via IntersectionObserver */
+    .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+      opacity: 0;
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal-up    { transform: translateY(30px); }
+    .reveal-left  { transform: translateX(-30px); }
+    .reveal-right { transform: translateX(30px); }
+    .reveal-scale { transform: scale(.92); }
+    .reveal-up.is-visible, .reveal-left.is-visible,
+    .reveal-right.is-visible, .reveal-scale.is-visible {
+      opacity: 1; transform: none;
+    }
+
+    /* Staggered children */
+    .stagger-children > * {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s ease calc(var(--delay,0)*1ms),
+                  transform .5s ease calc(var(--delay,0)*1ms);
+    }
+    .stagger-children.is-visible > * { opacity: 1; transform: none; }
+
+    /* Pulse glow */
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,159,67,.35); }
+      50%      { box-shadow: 0 0 0 12px rgba(255,159,67,.0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       NAVBAR
+  ======================================== -->
+  <header id="navbar" role="banner">
+    <nav class="navbar" aria-label="Navigasi utama" data-navbar>
+      <div class="container navbar__inner">
+
+        <a href="#hero" class="navbar__brand" aria-label="Beranda SD Nusantara Bangsa">
+          <img src="https://placehold.co/48x48/3a8f6f/ffffff?text=NB"
+               alt="Logo SD Nusantara Bangsa" class="navbar__logo" width="48" height="48" />
+          <div>
+            <span class="navbar__school-main">SD Nusantara Bangsa</span>
+            <span class="navbar__school-sub">Depok, Jawa Barat</span>
+          </div>
+        </a>
+
+        <ul class="navbar__links" role="list">
+          <li><a href="#about"          class="navbar__link" data-nav-link>Tentang</a></li>
+          <li><a href="#facilities"     class="navbar__link" data-nav-link>Fasilitas</a></li>
+          <li><a href="#teachers"       class="navbar__link" data-nav-link>Guru</a></li>
+          <li><a href="#student-affairs"class="navbar__link" data-nav-link>Kesiswaan</a></li>
+          <li><a href="#news"           class="navbar__link" data-nav-link>Berita</a></li>
+          <li><a href="#gallery"        class="navbar__link" data-nav-link>Galeri</a></li>
+          <li><a href="#contact"        class="navbar__link navbar__link--cta" data-nav-link>Kontak</a></li>
+        </ul>
+
+        <button class="navbar__hamburger"
+                aria-label="Buka menu navigasi"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                data-hamburger>
+          <span class="hamburger__icon hamburger__icon--open" aria-hidden="true">☰</span>
+          <span class="hamburger__icon hamburger__icon--close" aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="navbar__mobile" aria-hidden="true" data-mobile-menu>
+        <ul role="list">
+          <li><a href="#about"           class="navbar__mobile-link">Tentang</a></li>
+          <li><a href="#facilities"      class="navbar__mobile-link">Fasilitas</a></li>
+          <li><a href="#teachers"        class="navbar__mobile-link">Guru</a></li>
+          <li><a href="#student-affairs" class="navbar__mobile-link">Kesiswaan</a></li>
+          <li><a href="#news"            class="navbar__mobile-link">Berita</a></li>
+          <li><a href="#gallery"         class="navbar__mobile-link">Galeri</a></li>
+          <li><a href="#contact"         class="navbar__mobile-link">Kontak</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+    <section id="hero" aria-label="Selamat datang di SD Nusantara Bangsa">
+      <div class="hero" data-slider>
+
+        <div class="hero__slides" data-slides>
+          <div class="hero__slide hero__slide--active" data-slide="0">
+            <img src="https://placehold.co/1600x700/3a8f6f/edfaf4?text=Suasana+Sekolah"
+                 alt="Suasana belajar di SD Nusantara Bangsa" class="hero__img" />
+            <div class="hero__overlay"></div>
+          </div>
+          <div class="hero__slide" data-slide="1">
+            <img src="https://placehold.co/1600x700/5bb89a/ffffff?text=Kegiatan+Siswa"
+                 alt="Kegiatan siswa aktif dan kreatif" class="hero__img" />
+            <div class="hero__overlay"></div>
+          </div>
+          <div class="hero__slide" data-slide="2">
+            <img src="https://placehold.co/1600x700/2d7358/edfaf4?text=Prestasi+Membanggakan"
+                 alt="Prestasi membanggakan siswa SD Nusantara Bangsa" class="hero__img" />
+            <div class="hero__overlay"></div>
+          </div>
+        </div>
+
+        <div class="hero__content glass container" data-hero-content data-hero-parallax>
+          <p class="hero__label">Selamat Datang di</p>
+          <h1 class="hero__title">SD Nusantara Bangsa</h1>
+          <p class="hero__tagline">Membentuk Generasi Cerdas, Berkarakter, dan Berprestasi</p>
+          <div class="hero__actions">
+            <a href="#about"   class="btn btn-primary"><i class="fas fa-school" aria-hidden="true"></i> Tentang Kami</a>
+            <a href="#contact" class="btn btn-outline"><i class="fas fa-phone"  aria-hidden="true"></i> Hubungi Kami</a>
+          </div>
+        </div>
+
+        <button class="hero__nav hero__nav--prev" aria-label="Slide sebelumnya" data-slide-prev>
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="hero__nav hero__nav--next" aria-label="Slide berikutnya" data-slide-next>
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="hero__dots" role="tablist" aria-label="Slide indicator" data-dots>
+          <button class="hero__dot hero__dot--active" role="tab" aria-label="Slide 1" aria-selected="true"  data-dot="0"></button>
+          <button class="hero__dot"                   role="tab" aria-label="Slide 2" aria-selected="false" data-dot="1"></button>
+          <button class="hero__dot"                   role="tab" aria-label="Slide 3" aria-selected="false" data-dot="2"></button>
+        </div>
+
+        <!-- Wave divider — 2 layers for 3D depth -->
+        <div class="hero__wave wave-divider" aria-hidden="true">
+          <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path class="wave-back"  d="M0,50 C480,10 960,70 1440,30 L1440,70 L0,70 Z" fill="#ffffff" opacity="0.5"/>
+            <path class="wave-front" d="M0,35 C360,65 1080,5  1440,40 L1440,70 L0,70 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ABOUT
+    ======================================== -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <p class="section-label">Mengenal Kami</p>
+        <h2 class="section-title" id="about-title">Tentang Sekolah</h2>
+        <p class="section-subtitle">Berdiri sejak 1985, kami berkomitmen mencetak generasi terbaik bangsa</p>
+
+        <div class="about__history">
+          SD Nusantara Bangsa berdiri pada tahun 1985 di Kota Depok, Jawa Barat. Selama lebih dari tiga dekade, kami telah melahirkan ribuan alumni yang kini berkontribusi di berbagai bidang. Dengan pendekatan pembelajaran berpusat pada siswa dan nilai-nilai islami, kami terus berkembang menjadi sekolah pilihan keluarga di Depok dan sekitarnya.
+        </div>
+
+        <div class="about__vm-grid stagger-children">
+          <article class="about__vm-card card-3d" data-tilt aria-label="Visi sekolah">
+            <div class="about__vm-icon" aria-hidden="true"><i class="fas fa-eye"></i></div>
+            <h3>Visi</h3>
+            <p>Menjadi sekolah dasar unggulan yang mencetak generasi cerdas, berkarakter islami, kreatif, dan berdaya saing global pada tahun 2030.</p>
+          </article>
+          <article class="about__vm-card card-3d" data-tilt aria-label="Misi sekolah">
+            <div class="about__vm-icon" aria-hidden="true"><i class="fas fa-bullseye"></i></div>
+            <h3>Misi</h3>
+            <ul>
+              <li>Menyelenggarakan pembelajaran aktif, inovatif, dan menyenangkan</li>
+              <li>Membangun karakter islami melalui pembiasaan dan keteladanan</li>
+              <li>Mengembangkan potensi akademik dan non-akademik siswa</li>
+              <li>Menjalin kemitraan aktif dengan orang tua dan masyarakat</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="about__principal">
+          <img src="https://placehold.co/120x120/3a8f6f/edfaf4?text=KS"
+               alt="Foto Kepala Sekolah Bapak Drs. Ahmad Fauzi, M.Pd."
+               class="about__principal-photo" width="120" height="120" />
+          <div class="about__principal-info">
+            <blockquote class="about__quote">
+              <p>"Kami hadir untuk mendampingi setiap anak menemukan potensi terbaiknya. Di sini, setiap siswa adalah bintang yang bersinar dengan caranya sendiri."</p>
+              <footer>
+                <strong>Drs. Ahmad Fauzi, M.Pd.</strong>
+                <span>Kepala SD Nusantara Bangsa</span>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         STATS
+    ======================================== -->
+    <section id="stats" aria-labelledby="stats-title">
+      <div class="container">
+        <h2 class="section-title visually-hidden" id="stats-title">Statistik Sekolah</h2>
+        <div class="stats__grid stagger-children">
+          <div class="stats__item" data-counter="1240">
+            <div class="stats__icon" aria-hidden="true"><i class="fas fa-user-graduate"></i></div>
+            <span class="stats__number" aria-live="polite">0</span>
+            <span class="stats__label">Siswa Aktif</span>
+          </div>
+          <div class="stats__item" data-counter="68">
+            <div class="stats__icon" aria-hidden="true"><i class="fas fa-chalkboard-teacher"></i></div>
+            <span class="stats__number" aria-live="polite">0</span>
+            <span class="stats__label">Tenaga Pengajar</span>
+          </div>
+          <div class="stats__item" data-counter="24">
+            <div class="stats__icon" aria-hidden="true"><i class="fas fa-star"></i></div>
+            <span class="stats__number" aria-live="polite">0</span>
+            <span class="stats__label">Ekstrakurikuler</span>
+          </div>
+          <div class="stats__item" data-counter="1985">
+            <div class="stats__icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></div>
+            <span class="stats__number" aria-live="polite">0</span>
+            <span class="stats__label">Tahun Berdiri</span>
+          </div>
+        </div>
+
+        <div class="stats__accreditation" aria-label="Akreditasi A, 5 bintang, dari BAN-S/M">
+          <div class="stats__badge">
+            <span class="stats__badge-grade">A</span>
+            <span class="stats__badge-label">Akreditasi</span>
+          </div>
+          <div class="stats__stars" role="img" aria-label="5 bintang">
+            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i>
+          </div>
+          <p>Terakreditasi A oleh BAN-S/M</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         FACILITIES
+    ======================================== -->
+    <section id="facilities" aria-labelledby="facilities-title">
+      <div class="container">
+        <p class="section-label">Sarana &amp; Prasarana</p>
+        <h2 class="section-title" id="facilities-title">Fasilitas Unggulan</h2>
+        <p class="section-subtitle">Lingkungan belajar yang nyaman dan lengkap</p>
+
+        <div class="facilities__cards stagger-children">
+          <article class="facilities__card card-3d" data-tilt>
+            <div class="facilities__card-icon" aria-hidden="true"><i class="fas fa-flask"></i></div>
+            <h3>Laboratorium IPA</h3>
+            <p>Lab sains modern dengan alat peraga dan perangkat percobaan untuk pembelajaran saintifik.</p>
+          </article>
+          <article class="facilities__card card-3d" data-tilt>
+            <div class="facilities__card-icon" aria-hidden="true"><i class="fas fa-book-open"></i></div>
+            <h3>Perpustakaan Digital</h3>
+            <p>Koleksi lebih dari 5.000 buku fisik dan akses ribuan e-book untuk mendukung literasi siswa.</p>
+          </article>
+          <article class="facilities__card card-3d" data-tilt>
+            <div class="facilities__card-icon" aria-hidden="true"><i class="fas fa-laptop"></i></div>
+            <h3>Lab Komputer</h3>
+            <p>40 unit komputer dengan koneksi internet cepat untuk pembelajaran teknologi informasi.</p>
+          </article>
+          <article class="facilities__card card-3d" data-tilt>
+            <div class="facilities__card-icon" aria-hidden="true"><i class="fas fa-running"></i></div>
+            <h3>Lapangan Olahraga</h3>
+            <p>Lapangan serbaguna untuk sepak bola, basket, voli, dan kegiatan pramuka.</p>
+          </article>
+        </div>
+
+        <div class="facilities__grid" role="list" aria-label="Foto fasilitas sekolah">
+          <div class="facilities__photo" role="listitem">
+            <img src="https://placehold.co/400x300/3a8f6f/edfaf4?text=Lab+IPA" alt="Laboratorium IPA" loading="lazy" />
+            <div class="facilities__photo-overlay"><span>Laboratorium IPA</span></div>
+          </div>
+          <div class="facilities__photo" role="listitem">
+            <img src="https://placehold.co/400x300/5bb89a/ffffff?text=Perpustakaan" alt="Perpustakaan digital" loading="lazy" />
+            <div class="facilities__photo-overlay"><span>Perpustakaan</span></div>
+          </div>
+          <div class="facilities__photo" role="listitem">
+            <img src="https://placehold.co/400x300/2d7358/edfaf4?text=Lapangan" alt="Lapangan olahraga" loading="lazy" />
+            <div class="facilities__photo-overlay"><span>Lapangan Olahraga</span></div>
+          </div>
+          <div class="facilities__photo" role="listitem">
+            <img src="https://placehold.co/400x300/ff9f43/ffffff?text=Aula" alt="Aula serbaguna" loading="lazy" />
+            <div class="facilities__photo-overlay"><span>Aula Serbaguna</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ORGANIZATION
+    ======================================== -->
+    <section id="organization" aria-labelledby="org-title">
+      <div class="container">
+        <p class="section-label">Struktur</p>
+        <h2 class="section-title" id="org-title">Struktur Organisasi</h2>
+        <p class="section-subtitle">Jajaran pemimpin dan pengelola SD Nusantara Bangsa</p>
+
+        <div class="org__chart" role="tree" aria-label="Bagan struktur organisasi">
+          <div class="org__level">
+            <div class="org__node org__node--principal" role="treeitem">
+              <img src="https://placehold.co/80x80/3a8f6f/edfaf4?text=KS" alt="" aria-hidden="true" />
+              <strong>Drs. Ahmad Fauzi, M.Pd.</strong>
+              <span>Kepala Sekolah</span>
+            </div>
+          </div>
+          <div class="org__connector" aria-hidden="true"></div>
+          <div class="org__level">
+            <div class="org__node" role="treeitem">
+              <img src="https://placehold.co/72x72/5bb89a/ffffff?text=WKS" alt="" aria-hidden="true" />
+              <strong>Ibu Siti Rahayu, S.Pd.</strong>
+              <span>Wakil Kepala Sekolah</span>
+            </div>
+          </div>
+          <div class="org__connector" aria-hidden="true"></div>
+          <div class="org__level org__level--multi">
+            <div class="org__node" role="treeitem">
+              <img src="https://placehold.co/64x64/edfaf4/3a8f6f?text=KUR" alt="" aria-hidden="true" />
+              <strong>Budi Santoso, S.Pd.</strong>
+              <span>Koordinator Kurikulum</span>
+            </div>
+            <div class="org__node" role="treeitem">
+              <img src="https://placehold.co/64x64/edfaf4/3a8f6f?text=KSW" alt="" aria-hidden="true" />
+              <strong>Dewi Lestari, S.Pd.</strong>
+              <span>Koordinator Kesiswaan</span>
+            </div>
+            <div class="org__node" role="treeitem">
+              <img src="https://placehold.co/64x64/edfaf4/3a8f6f?text=HUM" alt="" aria-hidden="true" />
+              <strong>Rudi Hartono, S.E.</strong>
+              <span>Koordinator Humas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         TEACHERS
+    ======================================== -->
+    <section id="teachers" aria-labelledby="teachers-title">
+      <div class="container">
+        <p class="section-label">Tim Pengajar</p>
+        <h2 class="section-title" id="teachers-title">Guru &amp; Staf</h2>
+        <p class="section-subtitle">Pendidik profesional berdedikasi tinggi</p>
+
+        <div class="teachers__grid stagger-children" role="list" aria-label="Daftar guru">
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Eko Prasetyo, Guru Matematika">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/3a8f6f/edfaf4?text=G1" alt="Eko Prasetyo" loading="lazy" />
+              <h3>Eko Prasetyo, S.Pd.</h3>
+              <span class="teacher__subject">Matematika</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-chalkboard-teacher fa-2x"></i>
+              <h3>Eko Prasetyo</h3>
+              <p>10 tahun mengajar. Lulusan UPI Bandung. Spesialis matematika kreatif.</p>
+              <span class="teacher__subject">Matematika</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Rini Susanti, Guru Bahasa Indonesia">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/5bb89a/ffffff?text=G2" alt="Rini Susanti" loading="lazy" />
+              <h3>Rini Susanti, S.Pd.</h3>
+              <span class="teacher__subject">Bahasa Indonesia</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-book fa-2x"></i>
+              <h3>Rini Susanti</h3>
+              <p>8 tahun mengajar. Juara Guru Berprestasi Tingkat Kota 2022.</p>
+              <span class="teacher__subject">Bahasa Indonesia</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Hendra Wijaya, Guru IPA">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/2d7358/edfaf4?text=G3" alt="Hendra Wijaya" loading="lazy" />
+              <h3>Hendra Wijaya, S.Pd.</h3>
+              <span class="teacher__subject">IPA</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-flask fa-2x"></i>
+              <h3>Hendra Wijaya</h3>
+              <p>Lulusan ITB. Pengembang modul sains diakui Kemendikbud.</p>
+              <span class="teacher__subject">Ilmu Pengetahuan Alam</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Fatimah Zahra, Guru PAI">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/edfaf4/3a8f6f?text=G4" alt="Fatimah Zahra" loading="lazy" />
+              <h3>Fatimah Zahra, S.Ag.</h3>
+              <span class="teacher__subject">PAI</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-mosque fa-2x"></i>
+              <h3>Fatimah Zahra</h3>
+              <p>Hafizah 30 juz. Pembimbing tahfidz dan karakter islami siswa.</p>
+              <span class="teacher__subject">Pendidikan Agama Islam</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Agus Setiawan, Guru PJOK">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/3a8f6f/edfaf4?text=G5" alt="Agus Setiawan" loading="lazy" />
+              <h3>Agus Setiawan, S.Pd.</h3>
+              <span class="teacher__subject">PJOK</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-futbol fa-2x"></i>
+              <h3>Agus Setiawan</h3>
+              <p>Mantan atlet bulu tangkis nasional. Pelatih tim olahraga berprestasi.</p>
+              <span class="teacher__subject">Pendidikan Jasmani</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Maya Putri, Guru Seni Budaya">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/5bb89a/ffffff?text=G6" alt="Maya Putri" loading="lazy" />
+              <h3>Maya Putri, S.Sn.</h3>
+              <span class="teacher__subject">Seni Budaya</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-palette fa-2x"></i>
+              <h3>Maya Putri</h3>
+              <p>Seniman aktif. Membimbing paduan suara dan seni tari sekolah.</p>
+              <span class="teacher__subject">Seni Budaya &amp; Prakarya</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Dani Kurniawan, Guru IPS">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/ff9f43/ffffff?text=G7" alt="Dani Kurniawan" loading="lazy" />
+              <h3>Dani Kurniawan, S.Pd.</h3>
+              <span class="teacher__subject">IPS</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-globe-asia fa-2x"></i>
+              <h3>Dani Kurniawan</h3>
+              <p>Penggerak literasi sejarah dan sosial. Pembina pramuka tingkat lanjut.</p>
+              <span class="teacher__subject">Ilmu Pengetahuan Sosial</span>
+            </div>
+          </article>
+
+          <article class="teacher__card" data-flip role="listitem" tabindex="0" aria-label="Laila Nuraini, Guru Bahasa Inggris">
+            <div class="teacher__front">
+              <img src="https://placehold.co/200x200/2d7358/edfaf4?text=G8" alt="Laila Nuraini" loading="lazy" />
+              <h3>Laila Nuraini, S.Pd.</h3>
+              <span class="teacher__subject">Bahasa Inggris</span>
+            </div>
+            <div class="teacher__back" aria-hidden="true">
+              <i class="fas fa-language fa-2x"></i>
+              <h3>Laila Nuraini</h3>
+              <p>Sertifikat IELTS 8.0. Pembimbing English Club dan Debate Competition.</p>
+              <span class="teacher__subject">Bahasa Inggris</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         STUDENT AFFAIRS — TABS
+    ======================================== -->
+    <section id="student-affairs" aria-labelledby="student-affairs-title">
+      <div class="container">
+        <p class="section-label">Kesiswaan</p>
+        <h2 class="section-title" id="student-affairs-title">Kegiatan Siswa</h2>
+        <p class="section-subtitle">Pengembangan diri holistik di luar jam pelajaran</p>
+
+        <div class="tabs" role="tablist" aria-label="Kategori kegiatan siswa" data-tabs>
+          <button class="tab tab--active" role="tab" aria-selected="true"  aria-controls="tab-ekskul"  id="tab-btn-ekskul"  data-tab="ekskul">
+            <i class="fas fa-trophy" aria-hidden="true"></i> Ekstrakurikuler
+          </button>
+          <button class="tab"            role="tab" aria-selected="false" aria-controls="tab-prestasi" id="tab-btn-prestasi" data-tab="prestasi">
+            <i class="fas fa-medal" aria-hidden="true"></i> Prestasi
+          </button>
+          <button class="tab"            role="tab" aria-selected="false" aria-controls="tab-kegiatan" id="tab-btn-kegiatan" data-tab="kegiatan">
+            <i class="fas fa-calendar-check" aria-hidden="true"></i> Kegiatan
+          </button>
+        </div>
+
+        <div id="tab-ekskul" class="tab-content tab-content--active" role="tabpanel" aria-labelledby="tab-btn-ekskul" data-tab-content="ekskul">
+          <div class="tab-grid">
+            <div class="tab-item"><i class="fas fa-futbol fa-2x"></i><h4>Sepak Bola</h4><p>Latihan rutin Selasa &amp; Jumat</p></div>
+            <div class="tab-item"><i class="fas fa-music fa-2x"></i><h4>Paduan Suara</h4><p>Latihan setiap Rabu pukul 14.00</p></div>
+            <div class="tab-item"><i class="fas fa-campground fa-2x"></i><h4>Pramuka</h4><p>Gugus depan aktif dan berprestasi</p></div>
+            <div class="tab-item"><i class="fas fa-paint-brush fa-2x"></i><h4>Seni Rupa</h4><p>Mengembangkan kreativitas visual siswa</p></div>
+            <div class="tab-item"><i class="fas fa-robot fa-2x"></i><h4>Robotika</h4><p>Coding dan pemrograman untuk anak</p></div>
+            <div class="tab-item"><i class="fas fa-quran fa-2x"></i><h4>Tahfidz Quran</h4><p>Program hafalan Al-Quran terstruktur</p></div>
+          </div>
+        </div>
+
+        <div id="tab-prestasi" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-prestasi" data-tab-content="prestasi" hidden>
+          <div class="tab-grid">
+            <div class="tab-item"><i class="fas fa-trophy fa-2x" style="color:gold"></i><h4>Juara 1 Olimpiade Matematika</h4><p>Tingkat Nasional 2024</p></div>
+            <div class="tab-item"><i class="fas fa-trophy fa-2x" style="color:silver"></i><h4>Juara 2 Lomba Sains KSN</h4><p>Tingkat Nasional 2023</p></div>
+            <div class="tab-item"><i class="fas fa-trophy fa-2x" style="color:#cd7f32"></i><h4>Juara 3 Futsal Pelajar</h4><p>Tingkat Kota Depok 2024</p></div>
+            <div class="tab-item"><i class="fas fa-trophy fa-2x" style="color:gold"></i><h4>Terbaik Lomba Tahfidz</h4><p>Tingkat Provinsi 2023</p></div>
+          </div>
+        </div>
+
+        <div id="tab-kegiatan" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-kegiatan" data-tab-content="kegiatan" hidden>
+          <div class="tab-grid">
+            <div class="tab-item"><i class="fas fa-leaf fa-2x"></i><h4>Outing Class</h4><p>Kunjungan edukatif ke museum dan alam</p></div>
+            <div class="tab-item"><i class="fas fa-heart fa-2x"></i><h4>Bakti Sosial</h4><p>Kegiatan sosial dan berbagi bersama komunitas</p></div>
+            <div class="tab-item"><i class="fas fa-users fa-2x"></i><h4>Pentas Seni Tahunan</h4><p>Pergelaran seni siswa setiap akhir tahun</p></div>
+            <div class="tab-item"><i class="fas fa-moon fa-2x"></i><h4>Pesantren Ramadan</h4><p>Pendalaman nilai islami di bulan Ramadan</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ACHIEVEMENTS — TIMELINE
+    ======================================== -->
+    <section id="achievements" aria-labelledby="achievements-title">
+      <div class="container">
+        <p class="section-label">Kebanggaan Kami</p>
+        <h2 class="section-title" id="achievements-title">Prestasi &amp; Penghargaan</h2>
+        <p class="section-subtitle">Rekam jejak membanggakan siswa dan institusi</p>
+
+        <div class="timeline" role="list" aria-label="Timeline prestasi">
+          <div class="timeline__item timeline__item--gold" role="listitem">
+            <div class="timeline__badge" aria-label="Medali emas"><i class="fas fa-trophy"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2024</span>
+              <h4>Juara 1 Olimpiade Matematika</h4>
+              <span class="timeline__level timeline__level--national">Nasional</span>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--gold" role="listitem">
+            <div class="timeline__badge" aria-label="Penghargaan"><i class="fas fa-award"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2024</span>
+              <h4>Sekolah Adiwiyata Mandiri</h4>
+              <span class="timeline__level timeline__level--national">Nasional</span>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--silver" role="listitem">
+            <div class="timeline__badge" aria-label="Medali perak"><i class="fas fa-medal"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2023</span>
+              <h4>Juara 2 Lomba Sains KSN</h4>
+              <span class="timeline__level timeline__level--national">Nasional</span>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--gold" role="listitem">
+            <div class="timeline__badge" aria-label="Medali emas"><i class="fas fa-trophy"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2023</span>
+              <h4>Juara 1 Lomba Tahfidz Quran</h4>
+              <span class="timeline__level timeline__level--province">Provinsi</span>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--bronze" role="listitem">
+            <div class="timeline__badge" aria-label="Medali perunggu"><i class="fas fa-award"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2022</span>
+              <h4>Juara 3 Futsal Pelajar</h4>
+              <span class="timeline__level timeline__level--city">Kota Depok</span>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--gold" role="listitem">
+            <div class="timeline__badge" aria-label="Penghargaan"><i class="fas fa-star"></i></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2022</span>
+              <h4>Guru Berprestasi Tingkat Kota</h4>
+              <span class="timeline__level timeline__level--city">Kota Depok</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         NEWS
+    ======================================== -->
+    <section id="news" aria-labelledby="news-title">
+      <div class="container">
+        <p class="section-label">Informasi Terkini</p>
+        <h2 class="section-title" id="news-title">Berita &amp; Pengumuman</h2>
+        <p class="section-subtitle">Tetap terhubung dengan informasi terbaru dari sekolah</p>
+
+        <div class="news__layout">
+          <div class="news__cards">
+            <article class="news__card">
+              <a href="#" aria-label="Baca: Penerimaan Peserta Didik Baru TA 2025/2026">
+                <img src="https://placehold.co/400x220/3a8f6f/edfaf4?text=PPDB+2025" alt="Poster PPDB 2025" loading="lazy" />
+              </a>
+              <div class="news__card-body">
+                <time class="news__date" datetime="2026-01-15">15 Januari 2026</time>
+                <h3 class="news__title"><a href="#">Penerimaan Peserta Didik Baru TA 2025/2026 Dibuka</a></h3>
+                <p class="news__excerpt">Pendaftaran PPDB resmi dibuka mulai 15 Januari. Kuota terbatas, segera daftarkan putra-putri Anda.</p>
+              </div>
+            </article>
+            <article class="news__card">
+              <a href="#" aria-label="Baca: Siswa Raih Medali Emas Olimpiade Matematika">
+                <img src="https://placehold.co/400x220/5bb89a/ffffff?text=Olimpiade+Matematika" alt="Siswa berprestasi olimpiade matematika" loading="lazy" />
+              </a>
+              <div class="news__card-body">
+                <time class="news__date" datetime="2025-11-20">20 November 2025</time>
+                <h3 class="news__title"><a href="#">Siswa Kami Raih Medali Emas Olimpiade Matematika Nasional</a></h3>
+                <p class="news__excerpt">Ahmad Rizki, siswa kelas VI, membawa pulang medali emas dalam ajang olimpiade tingkat nasional di Jakarta.</p>
+              </div>
+            </article>
+            <article class="news__card">
+              <a href="#" aria-label="Baca: Workshop Parenting Era Digital">
+                <img src="https://placehold.co/400x220/ff9f43/ffffff?text=Workshop+Parenting" alt="Workshop parenting bersama orang tua" loading="lazy" />
+              </a>
+              <div class="news__card-body">
+                <time class="news__date" datetime="2025-10-05">5 Oktober 2025</time>
+                <h3 class="news__title"><a href="#">Workshop Parenting: Mendukung Belajar Anak di Era Digital</a></h3>
+                <p class="news__excerpt">Workshop bersama psikolog anak membantu orang tua mendampingi belajar di era digital.</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="news__sidebar" aria-label="Pengumuman dan kalender akademik">
+            <div class="news__announcements">
+              <h3><i class="fas fa-bullhorn" aria-hidden="true"></i> Pengumuman</h3>
+              <ul role="list">
+                <li>
+                  <span class="badge badge--new">Baru</span>
+                  <a href="#">Jadwal UTS Semester Ganjil 2025/2026</a>
+                  <time datetime="2026-03-28">28 Mar 2026</time>
+                </li>
+                <li>
+                  <span class="badge badge--new">Baru</span>
+                  <a href="#">Pengumuman Libur Hari Raya Idul Fitri</a>
+                  <time datetime="2026-03-25">25 Mar 2026</time>
+                </li>
+                <li>
+                  <a href="#">Hasil Seleksi Siswa Berprestasi Semester 1</a>
+                  <time datetime="2026-02-10">10 Feb 2026</time>
+                </li>
+                <li>
+                  <a href="#">Pengumuman Kegiatan Akhir Semester</a>
+                  <time datetime="2025-12-15">15 Des 2025</time>
+                </li>
+              </ul>
+            </div>
+
+            <div class="news__calendar">
+              <h3><i class="fas fa-calendar-alt" aria-hidden="true"></i> Kalender Akademik</h3>
+              <table aria-label="Kalender akademik semester genap 2025/2026">
+                <thead>
+                  <tr><th scope="col">Tanggal</th><th scope="col">Kegiatan</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>7–11 Apr 2026</td><td>UTS Semester Genap</td></tr>
+                  <tr><td>14–16 Apr 2026</td><td>Outing Class Kelas 4–6</td></tr>
+                  <tr><td>20 Apr 2026</td><td>Hari Kartini</td></tr>
+                  <tr><td>2 Mei 2026</td><td>Hari Pendidikan Nasional</td></tr>
+                  <tr><td>16–20 Jun 2026</td><td>UAS Semester Genap</td></tr>
+                  <tr><td>30 Jun 2026</td><td>Pembagian Rapor</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         GALLERY
+    ======================================== -->
+    <section id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <p class="section-label">Momen Berharga</p>
+        <h2 class="section-title" id="gallery-title">Galeri Foto</h2>
+        <p class="section-subtitle">Sekilas kegiatan dan kehidupan di SD Nusantara Bangsa</p>
+
+        <div class="gallery__grid" role="list" aria-label="Galeri foto sekolah" data-gallery>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/3a8f6f/edfaf4?text=Upacara" alt="Upacara bendera hari Senin" loading="lazy" data-lightbox data-caption="Upacara Bendera" />
+            <div class="gallery__overlay"><span>Upacara Bendera</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x500/5bb89a/ffffff?text=Kelas" alt="Suasana pembelajaran aktif di kelas" loading="lazy" data-lightbox data-caption="Pembelajaran di Kelas" />
+            <div class="gallery__overlay"><span>Pembelajaran di Kelas</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/2d7358/edfaf4?text=Pramuka" alt="Kegiatan pramuka siswa" loading="lazy" data-lightbox data-caption="Kegiatan Pramuka" />
+            <div class="gallery__overlay"><span>Kegiatan Pramuka</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/600x300/ff9f43/ffffff?text=Pentas+Seni" alt="Pentas seni tahunan siswa" loading="lazy" data-lightbox data-caption="Pentas Seni" />
+            <div class="gallery__overlay"><span>Pentas Seni</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/edfaf4/3a8f6f?text=Perpustakaan" alt="Siswa membaca di perpustakaan" loading="lazy" data-lightbox data-caption="Perpustakaan" />
+            <div class="gallery__overlay"><span>Perpustakaan</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/3a8f6f/edfaf4?text=Olahraga" alt="Kegiatan olahraga bersama" loading="lazy" data-lightbox data-caption="Olahraga" />
+            <div class="gallery__overlay"><span>Olahraga</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x500/5bb89a/ffffff?text=Olimpiade" alt="Persiapan olimpiade sains" loading="lazy" data-lightbox data-caption="Olimpiade Sains" />
+            <div class="gallery__overlay"><span>Olimpiade Sains</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/2d7358/edfaf4?text=Lab+Komputer" alt="Siswa di laboratorium komputer" loading="lazy" data-lightbox data-caption="Lab Komputer" />
+            <div class="gallery__overlay"><span>Lab Komputer</span></div>
+          </div>
+          <div class="gallery__item" role="listitem">
+            <img src="https://placehold.co/400x300/ff9f43/ffffff?text=Wisuda+Kelas+6" alt="Wisuda kelulusan kelas 6" loading="lazy" data-lightbox data-caption="Wisuda Kelas 6" />
+            <div class="gallery__overlay"><span>Wisuda Kelas 6</span></div>
+          </div>
+        </div>
+
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan foto" hidden data-lightbox-modal>
+          <button class="lightbox__close" aria-label="Tutup" data-lightbox-close>
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </button>
+          <img class="lightbox__img" src="" alt="" data-lightbox-img />
+          <p class="lightbox__caption" data-lightbox-caption></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS
+    ======================================== -->
+    <section id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <p class="section-label">Kata Mereka</p>
+        <h2 class="section-title" id="testimonials-title">Testimoni</h2>
+        <p class="section-subtitle">Pengalaman nyata dari orang tua dan alumni kami</p>
+
+        <div class="testimonials__carousel" data-testimonials>
+          <div class="testimonials__track" data-testimonials-track>
+
+            <article class="testimonial__card" data-testimonial-slide>
+              <blockquote>
+                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                <p>Anak saya sangat senang bersekolah di sini. Guru-gurunya sabar dan menyenangkan. Perkembangan akademis dan karakternya sangat pesat dalam setahun terakhir.</p>
+                <footer>
+                  <img src="https://placehold.co/64x64/3a8f6f/edfaf4?text=WT" alt="Ibu Wati Sumarni" loading="lazy" />
+                  <div><strong>Ibu Wati Sumarni</strong><span>Orang Tua Siswa Kelas 4</span></div>
+                </footer>
+              </blockquote>
+            </article>
+
+            <article class="testimonial__card" data-testimonial-slide>
+              <blockquote>
+                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                <p>Saya alumni SD Nusantara Bangsa angkatan 2010. Nilai-nilai yang ditanamkan di sini menjadi fondasi kuat dalam perjalanan hidup saya hingga kini.</p>
+                <footer>
+                  <img src="https://placehold.co/64x64/5bb89a/ffffff?text=RH" alt="Rian Hidayat" loading="lazy" />
+                  <div><strong>Rian Hidayat</strong><span>Alumni Angkatan 2010</span></div>
+                </footer>
+              </blockquote>
+            </article>
+
+            <article class="testimonial__card" data-testimonial-slide>
+              <blockquote>
+                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                <p>Program tahfidz dan ekskul di sekolah ini luar biasa. Anak kami berkembang tidak hanya akademis, tapi juga spiritual dan sosialnya. Highly recommended!</p>
+                <footer>
+                  <img src="https://placehold.co/64x64/ff9f43/ffffff?text=HR" alt="Bapak Hadi Raharjo" loading="lazy" />
+                  <div><strong>Bapak Hadi Raharjo</strong><span>Orang Tua Siswa Kelas 6</span></div>
+                </footer>
+              </blockquote>
+            </article>
+
+          </div>
+          <div class="testimonials__dots" role="tablist" aria-label="Navigasi testimoni" data-testimonials-dots>
+            <button class="testimonials__dot testimonials__dot--active" role="tab" aria-label="Testimoni 1" aria-selected="true"  data-dot="0"></button>
+            <button class="testimonials__dot"                            role="tab" aria-label="Testimoni 2" aria-selected="false" data-dot="1"></button>
+            <button class="testimonials__dot"                            role="tab" aria-label="Testimoni 3" aria-selected="false" data-dot="2"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         LOCATION
+    ======================================== -->
+    <section id="location" aria-labelledby="location-title">
+      <div class="container">
+        <p class="section-label">Temukan Kami</p>
+        <h2 class="section-title" id="location-title">Lokasi Sekolah</h2>
+        <p class="section-subtitle">Mudah dijangkau di pusat Kota Depok</p>
+
+        <div class="location__layout">
+          <div class="location__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d106.82473307496459!3d-6.374945993630508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjInMjkuOCJTIDEwNsKwNDknMzYuMiJF!5e0!3m2!1sid!2sid!4v1700000000000"
+              width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lokasi SD Nusantara Bangsa"
+              aria-label="Peta Google Maps lokasi SD Nusantara Bangsa">
+            </iframe>
+          </div>
+
+          <aside class="location__info" aria-label="Alamat dan jam operasional">
+            <div class="location__address">
+              <h3><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Alamat</h3>
+              <address>Jl. Pendidikan No. 17<br />Beji, Kota Depok,<br />Jawa Barat 16421</address>
+            </div>
+            <div class="location__hours">
+              <h3><i class="fas fa-clock" aria-hidden="true"></i> Jam Operasional</h3>
+              <table aria-label="Jadwal jam operasional">
+                <tbody>
+                  <tr><td>Senin – Kamis</td><td>07.00 – 14.30 WIB</td></tr>
+                  <tr><td>Jumat</td><td>07.00 – 11.30 WIB</td></tr>
+                  <tr><td>Sabtu</td><td>07.00 – 12.00 WIB</td></tr>
+                  <tr><td>Minggu</td><td>Tutup</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         CONTACT
+    ======================================== -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="section-label">Hubungi Kami</p>
+        <h2 class="section-title" id="contact-title">Kontak &amp; Buku Tamu</h2>
+        <p class="section-subtitle">Kami siap menjawab pertanyaan Anda</p>
+
+        <div class="contact__layout">
+          <div class="contact__info">
+            <a href="https://wa.me/6281234567890" class="contact__wa" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i>
+              <div><span>WhatsApp Kami</span><strong>+62 812-3456-7890</strong></div>
+            </a>
+
+            <ul class="contact__details" role="list">
+              <li><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:+62211234567">(021) 1234567</a></li>
+              <li><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:info@sdnusantarabangsa.sch.id">info@sdnusantarabangsa.sch.id</a></li>
+              <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Jl. Pendidikan No. 17, Depok</span></li>
+            </ul>
+
+            <div class="contact__socials" aria-label="Media sosial">
+              <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="#" class="social-link" aria-label="Facebook"  target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="#" class="social-link" aria-label="YouTube"   target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+              <a href="#" class="social-link" aria-label="TikTok"    target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+          <div class="contact__form-wrap">
+            <form class="contact__form" action="mailto:info@sdnusantarabangsa.sch.id" method="POST" enctype="text/plain" aria-label="Formulir buku tamu">
+              <h3>Tinggalkan Pesan</h3>
+              <div class="form__group">
+                <label for="guest-name">Nama Lengkap <span aria-hidden="true">*</span></label>
+                <input type="text" id="guest-name" name="name" placeholder="Masukkan nama Anda" required autocomplete="name" aria-required="true" />
+              </div>
+              <div class="form__group">
+                <label for="guest-email">Alamat Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="guest-email" name="email" placeholder="contoh@email.com" required autocomplete="email" aria-required="true" />
+              </div>
+              <div class="form__group">
+                <label for="guest-message">Pesan <span aria-hidden="true">*</span></label>
+                <textarea id="guest-message" name="message" rows="5" placeholder="Tuliskan pesan atau pertanyaan Anda…" required aria-required="true"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i> Kirim Pesan
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer__main">
+      <div class="container footer__grid">
+
+        <div class="footer__brand">
+          <a href="#hero" class="footer__logo-link" aria-label="Kembali ke atas">
+            <img src="https://placehold.co/56x56/edfaf4/3a8f6f?text=NB" alt="Logo SD Nusantara Bangsa" width="56" height="56" />
+            <span>SD Nusantara Bangsa</span>
+          </a>
+          <p>Membentuk Generasi Cerdas, Berkarakter, dan Berprestasi sejak 1985.</p>
+          <address><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Jl. Pendidikan No. 17, Depok</address>
+        </div>
+
+        <nav class="footer__links" aria-label="Tautan cepat">
+          <h4>Tautan Cepat</h4>
+          <ul role="list">
+            <li><a href="#about">Tentang Sekolah</a></li>
+            <li><a href="#facilities">Fasilitas</a></li>
+            <li><a href="#organization">Struktur Organisasi</a></li>
+            <li><a href="#teachers">Guru &amp; Staf</a></li>
+            <li><a href="#student-affairs">Kesiswaan</a></li>
+            <li><a href="#news">Berita</a></li>
+            <li><a href="#gallery">Galeri</a></li>
+            <li><a href="#contact">Kontak</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__programs">
+          <h4>Program Unggulan</h4>
+          <ul role="list">
+            <li><a href="#student-affairs">Tahfidz Al-Quran</a></li>
+            <li><a href="#student-affairs">Robotika &amp; Coding</a></li>
+            <li><a href="#student-affairs">Olimpiade Sains</a></li>
+            <li><a href="#student-affairs">Pramuka</a></li>
+            <li><a href="#student-affairs">English Club</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__social">
+          <h4>Ikuti Kami</h4>
+          <div class="footer__social-links" aria-label="Media sosial sekolah">
+            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" class="social-link" aria-label="Facebook"  target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"   target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+            <a href="#" class="social-link" aria-label="TikTok"    target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+          </div>
+          <div class="footer__contact-quick">
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> +62 812-3456-7890
+            </a>
+            <a href="mailto:info@sdnusantarabangsa.sch.id">
+              <i class="fas fa-envelope" aria-hidden="true"></i> info@sdnusantarabangsa.sch.id
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; <span id="footer-year">2026</span> SD Nusantara Bangsa. Semua Hak Dilindungi.</p>
+        <p>SD Nusantara Bangsa by <strong>ilycode softwarelabs</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" aria-label="Kembali ke atas" data-back-to-top hidden>
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ========================================
+       JAVASCRIPT — Vanilla ES6+, no libraries
+       Organized: Utils → Components → Init
+  ======================================== -->
+  <script>
+    'use strict';
+
+    /* ============================================================
+       UTILS
+       Shared helpers used across all components
+    ============================================================ */
+    const Utils = {
+      /** rAF-throttled function wrapper */
+      raf(fn) {
+        let ticking = false;
+        return function (...args) {
+          if (!ticking) {
+            requestAnimationFrame(() => { fn.apply(this, args); ticking = false; });
+            ticking = true;
+          }
+        };
+      },
+
+      /** Passive event helper */
+      onPassive(el, ev, fn) {
+        el.addEventListener(ev, fn, { passive: true });
+      },
+
+      /** easeOutQuart easing (counter animation) */
+      easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); },
+
+      /** Format number with locale separators */
+      formatNumber(n) { return Math.floor(n).toLocaleString('id-ID'); },
+
+      /** Clamp value between min and max */
+      clamp(val, min, max) { return Math.min(Math.max(val, min), max); },
+
+      /** Detect touch/coarse pointer device */
+      isTouch() { return window.matchMedia('(pointer: coarse)').matches; }
+    };
+
+
+    /* ============================================================
+       COMPONENT: Navigation
+       - Mobile hamburger ☰ ↔ ✕
+       - Sticky navbar (.scrolled on scroll > 50px)
+       - Active section highlight via IntersectionObserver
+       - Smooth scroll for nav links
+    ============================================================ */
+    function initNavigation() {
+      const navbar   = document.querySelector('[data-navbar]');
+      const hamburger= document.querySelector('[data-hamburger]');
+      const mobileMenu = document.querySelector('[data-mobile-menu]');
+      const navLinks = document.querySelectorAll('[data-nav-link]');
+      const sections = document.querySelectorAll('main section[id]');
+
+      if (!navbar) return;
+
+      /* Sticky scroll + active link (scroll events) */
+      let lastSection = '';
+      const onScroll = Utils.raf(() => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+        /* Active section highlight */
+        let current = '';
+        sections.forEach(s => {
+          if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+        if (current !== lastSection) {
+          lastSection = current;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+          });
+        }
+      });
+      Utils.onPassive(window, 'scroll', onScroll);
+
+      /* Hamburger toggle */
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+          hamburger.setAttribute('aria-expanded', String(!isOpen));
+          mobileMenu.classList.toggle('open', !isOpen);
+          mobileMenu.setAttribute('aria-hidden', String(isOpen));
+          document.body.style.overflow = isOpen ? '' : 'hidden';
+        });
+
+        /* Close mobile menu on link click */
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.classList.remove('open');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }));
+
+        /* Close on outside click */
+        document.addEventListener('click', e => {
+          if (mobileMenu.classList.contains('open') &&
+              !navbar.contains(e.target)) {
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.remove('open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      /* Smooth scroll for all anchor links */
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          const offset = navbar.offsetHeight;
+          window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        });
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Hero Slider
+       - Auto-play 4s, fade transition
+       - Prev/Next buttons
+       - Dot indicators
+       - Touch swipe (mobile)
+    ============================================================ */
+    function initHeroSlider() {
+      const wrapper = document.querySelector('[data-slider]');
+      if (!wrapper) return;
+
+      const slides  = wrapper.querySelectorAll('[data-slide]');
+      const dots    = wrapper.querySelectorAll('[data-dot]');
+      const btnPrev = wrapper.querySelector('[data-slide-prev]');
+      const btnNext = wrapper.querySelector('[data-slide-next]');
+
+      let current = 0;
+      let timer   = null;
+
+      function goTo(n) {
+        slides[current].classList.remove('hero__slide--active');
+        dots[current].classList.remove('hero__dot--active');
+        dots[current].setAttribute('aria-selected', 'false');
+        current = ((n % slides.length) + slides.length) % slides.length;
+        slides[current].classList.add('hero__slide--active');
+        dots[current].classList.add('hero__dot--active');
+        dots[current].setAttribute('aria-selected', 'true');
+      }
+
+      function start() { timer = setInterval(() => goTo(current + 1), 4000); }
+      function stop()  { clearInterval(timer); }
+
+      btnPrev?.addEventListener('click', () => { stop(); goTo(current - 1); start(); });
+      btnNext?.addEventListener('click', () => { stop(); goTo(current + 1); start(); });
+      dots.forEach(d => d.addEventListener('click', () => { stop(); goTo(+d.dataset.dot); start(); }));
+
+      /* Touch swipe */
+      let touchStartX = 0;
+      Utils.onPassive(wrapper, 'touchstart', e => { touchStartX = e.touches[0].clientX; });
+      Utils.onPassive(wrapper, 'touchend',   e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        stop();
+        goTo(dx < 0 ? current + 1 : current - 1);
+        start();
+      });
+
+      start();
+
+      /* Cleanup on unload */
+      window.addEventListener('pagehide', stop);
+    }
+
+
+    /* ============================================================
+       COMPONENT: Counter Animation
+       - IntersectionObserver threshold 0.5
+       - easeOutQuart, 2000ms duration
+       - requestAnimationFrame update
+    ============================================================ */
+    function initCounters() {
+      const items = document.querySelectorAll('[data-counter]');
+      if (!items.length) return;
+
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          obs.unobserve(entry.target);
+
+          const target  = +entry.target.dataset.counter;
+          const display = entry.target.querySelector('.stats__number');
+          if (!display) return;
+
+          const startTime = performance.now();
+          const duration  = 2000;
+
+          function tick(now) {
+            const elapsed  = now - startTime;
+            const progress = Utils.clamp(elapsed / duration, 0, 1);
+            display.textContent = Utils.formatNumber(target * Utils.easeOutQuart(progress));
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.5 });
+
+      items.forEach(el => obs.observe(el));
+    }
+
+
+    /* ============================================================
+       COMPONENT: 3D Card Tilt
+       - .card-3d[data-tilt] elements
+       - rotateX/Y ±8deg based on mouse position from center
+       - rAF throttled, disabled on touch devices
+    ============================================================ */
+    function initTilt() {
+      if (Utils.isTouch()) return;
+
+      document.querySelectorAll('[data-tilt]').forEach(card => {
+        const MAX_DEG = 8;
+
+        const onMove = Utils.raf(e => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+          const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+          const rotY = Utils.clamp( x * MAX_DEG, -MAX_DEG, MAX_DEG);
+          const rotX = Utils.clamp(-y * MAX_DEG, -MAX_DEG, MAX_DEG);
+          card.style.transform = `perspective(1000px) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(1.025)`;
+          card.style.boxShadow = `${-rotY * 1.5}px ${rotX * 1.5}px 24px rgba(58,143,111,.2)`;
+        });
+
+        card.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.boxShadow = '';
+        });
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Hero Parallax
+       - Layers move at different speeds on mousemove
+       - Speed: back 0.02, mid 0.05, front 0.1
+       - Disabled on touch
+    ============================================================ */
+    function initParallax() {
+      if (Utils.isTouch()) return;
+
+      const hero = document.querySelector('[data-slider]');
+      if (!hero) return;
+
+      const layers = [
+        { el: hero.querySelector('.hero__slides'), speed: 0.02 },
+        { el: hero.querySelector('[data-hero-parallax]'), speed: 0.08 }
+      ].filter(l => l.el);
+
+      const onMove = Utils.raf(e => {
+        const rect   = hero.getBoundingClientRect();
+        const cx     = rect.width  / 2;
+        const cy     = rect.height / 2;
+        const dx     = e.clientX - rect.left - cx;
+        const dy     = e.clientY - rect.top  - cy;
+
+        layers.forEach(({ el, speed }) => {
+          el.style.transform = `translate(${dx * speed}px, ${dy * speed}px)`;
+        });
+      });
+
+      hero.addEventListener('mousemove', onMove);
+      hero.addEventListener('mouseleave', () => {
+        layers.forEach(({ el }) => { el.style.transform = ''; });
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Tab Filtering (Student Affairs)
+       - Click tab → fade out → swap content → fade in
+       - Active tab indicator
+    ============================================================ */
+    function initTabs() {
+      const container = document.querySelector('[data-tabs]');
+      if (!container) return;
+
+      const tabs    = container.querySelectorAll('[data-tab]');
+      const panels  = document.querySelectorAll('[data-tab-content]');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          if (tab.classList.contains('tab--active')) return;
+
+          /* Deactivate all */
+          tabs.forEach(t => { t.classList.remove('tab--active'); t.setAttribute('aria-selected', 'false'); });
+
+          /* Fade out current panel */
+          const activePanel = document.querySelector('[data-tab-content].tab-content--active');
+          if (activePanel) {
+            activePanel.style.opacity = '0';
+            activePanel.style.transform = 'translateY(6px)';
+          }
+
+          setTimeout(() => {
+            panels.forEach(p => { p.classList.remove('tab-content--active'); p.hidden = true; p.style.opacity = ''; p.style.transform = ''; });
+
+            /* Activate clicked tab */
+            tab.classList.add('tab--active');
+            tab.setAttribute('aria-selected', 'true');
+
+            const target = document.querySelector(`[data-tab-content="${tab.dataset.tab}"]`);
+            if (target) {
+              target.hidden = false;
+              target.classList.add('tab-content--active');
+              /* Fade in */
+              requestAnimationFrame(() => {
+                target.style.opacity = '0';
+                target.style.transform = 'translateY(6px)';
+                requestAnimationFrame(() => {
+                  target.style.transition = 'opacity .35s ease, transform .35s ease';
+                  target.style.opacity    = '1';
+                  target.style.transform  = 'translateY(0)';
+                });
+              });
+            }
+          }, 200);
+        });
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Lightbox Gallery
+       - Click image → modal with full-size
+       - Close: X button, overlay click, Escape key
+       - Prev/Next navigation between images
+       - Prevents body scroll
+    ============================================================ */
+    function initLightbox() {
+      const modal   = document.querySelector('[data-lightbox-modal]');
+      const imgEl   = document.querySelector('[data-lightbox-img]');
+      const capEl   = document.querySelector('[data-lightbox-caption]');
+      const closeBtn= document.querySelector('[data-lightbox-close]');
+      if (!modal) return;
+
+      const images  = [...document.querySelectorAll('[data-lightbox]')];
+      let currentIdx = 0;
+
+      /* Prev/Next buttons (injected) */
+      const btnPrev = document.createElement('button');
+      const btnNext = document.createElement('button');
+      btnPrev.className = 'lightbox__nav lightbox__nav--prev';
+      btnNext.className = 'lightbox__nav lightbox__nav--next';
+      btnPrev.setAttribute('aria-label', 'Foto sebelumnya');
+      btnNext.setAttribute('aria-label', 'Foto berikutnya');
+      btnPrev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+      btnNext.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+      modal.appendChild(btnPrev);
+      modal.appendChild(btnNext);
+
+      /* Inject nav styles */
+      const navStyle = document.createElement('style');
+      navStyle.textContent = `.lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;width:48px;height:48px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s ease;}.lightbox__nav:hover{background:rgba(255,255,255,.3);}.lightbox__nav--prev{left:1.5rem;}.lightbox__nav--next{right:1.5rem;}`;
+      document.head.appendChild(navStyle);
+
+      function showImage(idx) {
+        currentIdx = ((idx % images.length) + images.length) % images.length;
+        const img = images[currentIdx];
+        imgEl.src = img.src;
+        imgEl.alt = img.alt;
+        capEl.textContent = img.dataset.caption || img.alt;
+        btnPrev.style.display = images.length > 1 ? '' : 'none';
+        btnNext.style.display = images.length > 1 ? '' : 'none';
+      }
+
+      function openLightbox(idx) {
+        showImage(idx);
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      /* Attach click to all gallery images */
+      images.forEach((img, i) => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => openLightbox(i));
+      });
+
+      closeBtn?.addEventListener('click', closeLightbox);
+      btnPrev.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx - 1); });
+      btnNext.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx + 1); });
+
+      /* Close on overlay click */
+      modal.addEventListener('click', e => { if (e.target === modal) closeLightbox(); });
+
+      /* Keyboard navigation */
+      document.addEventListener('keydown', e => {
+        if (modal.hidden) return;
+        if (e.key === 'Escape')    closeLightbox();
+        if (e.key === 'ArrowLeft') showImage(currentIdx - 1);
+        if (e.key === 'ArrowRight')showImage(currentIdx + 1);
+      });
+
+      /* Touch swipe inside lightbox */
+      let swipeX = 0;
+      Utils.onPassive(modal, 'touchstart', e => { swipeX = e.touches[0].clientX; });
+      Utils.onPassive(modal, 'touchend',   e => {
+        const dx = e.changedTouches[0].clientX - swipeX;
+        if (Math.abs(dx) < 40) return;
+        showImage(dx < 0 ? currentIdx + 1 : currentIdx - 1);
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Testimonial Carousel
+       - Auto-slide 5s, translateX
+       - Pause on hover
+       - Dot indicators
+       - Touch swipe
+    ============================================================ */
+    function initTestimonials() {
+      const wrap  = document.querySelector('[data-testimonials]');
+      const track = document.querySelector('[data-testimonials-track]');
+      const dots  = document.querySelectorAll('[data-testimonials-dots] [data-dot]');
+      if (!wrap || !track) return;
+
+      const slides = track.querySelectorAll('[data-testimonial-slide]');
+      let current  = 0;
+      let timer    = null;
+      let paused   = false;
+
+      function goTo(n) {
+        dots[current]?.classList.remove('testimonials__dot--active');
+        dots[current]?.setAttribute('aria-selected', 'false');
+        current = ((n % slides.length) + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots[current]?.classList.add('testimonials__dot--active');
+        dots[current]?.setAttribute('aria-selected', 'true');
+      }
+
+      function start() {
+        if (paused) return;
+        timer = setInterval(() => goTo(current + 1), 5000);
+      }
+      function stop() { clearInterval(timer); }
+
+      dots.forEach(d => d.addEventListener('click', () => { stop(); goTo(+d.dataset.dot); start(); }));
+
+      Utils.onPassive(wrap, 'mouseenter', () => { paused = true;  stop(); });
+      Utils.onPassive(wrap, 'mouseleave', () => { paused = false; start(); });
+
+      /* Touch swipe */
+      let touchX = 0;
+      Utils.onPassive(track, 'touchstart', e => { touchX = e.touches[0].clientX; });
+      Utils.onPassive(track, 'touchend',   e => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) < 40) return;
+        stop(); goTo(dx < 0 ? current + 1 : current - 1); start();
+      });
+
+      start();
+      window.addEventListener('pagehide', stop);
+    }
+
+
+    /* ============================================================
+       COMPONENT: Form Handling
+       - Validate name + email (required)
+       - mailto action on submit
+       - Success message (no backend)
+    ============================================================ */
+    function initForm() {
+      const form = document.querySelector('.contact__form');
+      if (!form) return;
+
+      /* Inject success message container */
+      const successMsg = document.createElement('div');
+      successMsg.className = 'form-success';
+      successMsg.setAttribute('role', 'alert');
+      successMsg.setAttribute('aria-live', 'polite');
+      successMsg.hidden = true;
+      successMsg.innerHTML = `
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <p><strong>Pesan terkirim!</strong> Terima kasih, kami akan segera menghubungi Anda.</p>
+      `;
+
+      /* Inject success styles */
+      const style = document.createElement('style');
+      style.textContent = `.form-success{display:flex;align-items:center;gap:.75rem;background:#edfaf4;border:1px solid #5bb89a;border-radius:16px;padding:1rem 1.25rem;margin-top:1rem;color:#2c3e35;}.form-success i{color:#3a8f6f;font-size:1.5rem;flex-shrink:0;}.form-success[hidden]{display:none;}.form__group.error input,.form__group.error textarea{border-color:#e55;}.form__error{color:#e55;font-size:.8rem;margin-top:.25rem;display:block;}`;
+      document.head.appendChild(style);
+      form.appendChild(successMsg);
+
+      function showError(field, msg) {
+        const group = field.closest('.form__group');
+        group.classList.add('error');
+        let err = group.querySelector('.form__error');
+        if (!err) { err = document.createElement('span'); err.className = 'form__error'; group.appendChild(err); }
+        err.textContent = msg;
+      }
+
+      function clearErrors() {
+        form.querySelectorAll('.form__group.error').forEach(g => g.classList.remove('error'));
+        form.querySelectorAll('.form__error').forEach(e => e.remove());
+      }
+
+      /* Real-time clear on input */
+      form.querySelectorAll('input, textarea').forEach(el => {
+        el.addEventListener('input', () => {
+          const group = el.closest('.form__group');
+          group.classList.remove('error');
+          group.querySelector('.form__error')?.remove();
+        });
+      });
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        clearErrors();
+
+        const nameEl  = form.querySelector('#guest-name');
+        const emailEl = form.querySelector('#guest-email');
+        const msgEl   = form.querySelector('#guest-message');
+        let valid = true;
+
+        if (!nameEl.value.trim()) {
+          showError(nameEl, 'Nama lengkap wajib diisi.');
+          valid = false;
+        }
+        if (!emailEl.value.trim()) {
+          showError(emailEl, 'Alamat email wajib diisi.');
+          valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+          showError(emailEl, 'Format email tidak valid.');
+          valid = false;
+        }
+        if (!msgEl.value.trim()) {
+          showError(msgEl, 'Pesan tidak boleh kosong.');
+          valid = false;
+        }
+        if (!valid) { form.querySelector('.form__group.error input, .form__group.error textarea')?.focus(); return; }
+
+        /* Build mailto and fire */
+        const subject = encodeURIComponent(`Pesan dari ${nameEl.value.trim()} - Buku Tamu`);
+        const body    = encodeURIComponent(`Nama: ${nameEl.value}\nEmail: ${emailEl.value}\n\n${msgEl.value}`);
+        window.location.href = `mailto:info@sdnusantarabangsa.sch.id?subject=${subject}&body=${body}`;
+
+        /* Show success, reset form */
+        successMsg.hidden = false;
+        form.reset();
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => { successMsg.hidden = true; }, 6000);
+      });
+    }
+
+
+    /* ============================================================
+       COMPONENT: Scroll Animations
+       - .animate-on-scroll → IntersectionObserver
+       - threshold 0.15, rootMargin '0px 0px -50px 0px'
+       - Adds .visible → CSS handles transition
+       - Stagger delay for list children
+       - once: true
+    ============================================================ */
+    function initScrollAnimations() {
+      /* Mark section headings */
+      document.querySelectorAll('.section-title, .section-label, .section-subtitle').forEach(el => {
+        el.classList.add('animate-on-scroll');
+      });
+
+      /* Mark cards / items with stagger */
+      const staggerParents = [
+        '.about__vm-grid', '.facilities__cards', '.teachers__grid',
+        '.tab-grid', '.stats__grid', '.org__level--multi'
+      ];
+      staggerParents.forEach(sel => {
+        document.querySelectorAll(sel).forEach(parent => {
+          [...parent.children].forEach((child, i) => {
+            child.classList.add('animate-on-scroll');
+            child.style.transitionDelay = (i * 80) + 'ms';
+          });
+        });
+      });
+
+      /* Timeline, news, gallery */
+      document.querySelectorAll('.timeline__item, .news__card, .gallery__item').forEach((el, i) => {
+        el.classList.add('animate-on-scroll');
+        el.style.transitionDelay = (i % 4 * 80) + 'ms';
+      });
+
+      /* Inject animate-on-scroll base CSS */
+      const style = document.createElement('style');
+      style.textContent = `.animate-on-scroll{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}.animate-on-scroll.visible{opacity:1;transform:none;}`;
+      document.head.appendChild(style);
+
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => obs.observe(el));
+    }
+
+
+    /* ============================================================
+       COMPONENT: Counter (already declared above as initCounters)
+       COMPONENT: Back to Top
+    ============================================================ */
+    function initBackToTop() {
+      const btn = document.querySelector('[data-back-to-top]');
+      if (!btn) return;
+      Utils.onPassive(window, 'scroll', Utils.raf(() => {
+        btn.hidden = window.scrollY < 400;
+      }));
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+
+    /* ============================================================
+       COMPONENT: Teacher Flip (touch/click toggle)
+    ============================================================ */
+    function initTeacherFlip() {
+      if (!Utils.isTouch()) return;
+      document.querySelectorAll('.teacher__card').forEach(card => {
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+      });
+    }
+
+
+    /* ============================================================
+       INIT — DOMContentLoaded
+    ============================================================ */
+    document.addEventListener('DOMContentLoaded', () => {
+      initNavigation();
+      initHeroSlider();
+      initCounters();
+      initTilt();
+      initParallax();
+      initTabs();
+      initLightbox();
+      initTestimonials();
+      initForm();
+      initScrollAnimations();
+      initBackToTop();
+      initTeacherFlip();
+
+      /* Footer year */
+      const yr = document.getElementById('footer-year');
+      if (yr) yr.textContent = new Date().getFullYear();
+    });
+  </script>
+
+</body>
+</html>

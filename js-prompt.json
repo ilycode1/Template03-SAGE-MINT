@@ -1,0 +1,118 @@
+{
+  "js_prompt": {
+    "role": "JavaScript Interaction Engineer",
+    "context": "Create vanilla JS for SAGE MINT school website. Implement all interactions without libraries. Max 5KB minified target. ES6+ with fallbacks.",
+    "modules": [
+      {
+        "name": "Navigation",
+        "features": [
+          "Mobile menu toggle: hamburger ☰ ↔ ✕ animation (classList toggle)",
+          "Sticky navbar: add .scrolled class on scroll > 50px (backdrop blur + shadow)",
+          "Active section highlight: Intersection Observer on sections, update nav links",
+          "Smooth scroll: document.querySelector(id).scrollIntoView({behavior: 'smooth'})"
+        ]
+      },
+      {
+        "name": "Hero Slider",
+        "features": [
+          "Auto-play 4s interval (setInterval)",
+          "3 slides with fade/slide transition",
+          "Prev/Next buttons clear interval then change slide",
+          "Dot indicators active state sync",
+          "Touch swipe support for mobile"
+        ]
+      },
+      {
+        "name": "3D Tilt Effect",
+        "features": [
+          "Target: .card-3d elements (teacher cards, program cards)",
+          "Mouse move: calculate offset from center (e.clientX - rect.left)",
+          "Apply rotateX and rotateY (max ±8deg) via style.transform",
+          "Mouse leave: reset transform with transition",
+          "Throttle events for performance (requestAnimationFrame)"
+        ]
+      },
+      {
+        "name": "Parallax Hero",
+        "features": [
+          "Layered elements move at different speeds on mousemove",
+          "Formula: translate = (mousePos - center) * speedFactor",
+          "Speed factors: background 0.02, mid 0.05, front 0.1"
+        ]
+      },
+      {
+        "name": "Counter Animation",
+        "features": [
+          "Trigger: Intersection Observer threshold 0.5",
+          "Animate from 0 to target number (data-target attribute)",
+          "Duration: 2000ms, easing: easeOutQuart",
+          "Update DOM every 16ms (requestAnimationFrame)",
+          "Format numbers with locale (1.240 → 1,240)"
+        ]
+      },
+      {
+        "name": "Tab Filtering",
+        "features": [
+          "Student affairs section: tabs [Extracurricular, Achievements, Activities]",
+          "Click handler: filter grid items by category data attribute",
+          "Fade out → rearrange → fade in animation",
+          "Active tab indicator styling"
+        ]
+      },
+      {
+        "name": "Lightbox Gallery",
+        "features": [
+          "Click gallery image → open modal with full size",
+          "Overlay background rgba(0,0,0,0.9)",
+          "Close on X button, overlay click, or Escape key",
+          "Prevent body scroll when open",
+          "Next/prev navigation if multiple images"
+        ]
+      },
+      {
+        "name": "Testimonial Carousel",
+        "features": [
+          "Auto-slide every 5s (translateX)",
+          "Pause on hover (mouseenter/mouseleave)",
+          "Dot indicators clickable",
+          "Infinite loop (clone first/last for seamless)",
+          "Touch swipe support"
+        ]
+      },
+      {
+        "name": "Form Handling",
+        "features": [
+          "Guestbook form validation (name, email required)",
+          "Mailto action generation on submit",
+          "Success message display (no backend)",
+          "Input focus effects coordination with CSS"
+        ]
+      },
+      {
+        "name": "Scroll Animations",
+        "features": [
+          "Intersection Observer for .animate-on-scroll elements",
+          "Threshold: 0.15, rootMargin: '0px 0px -50px 0px'",
+          "Add .visible class → CSS handles transition",
+          "Stagger delay calculation for lists",
+          "Once: true (don't re-animate on scroll up)"
+        ]
+      }
+    ],
+    "technical_requirements": [
+      "Vanilla JS only, no jQuery/frameworks",
+      "Event delegation for dynamic elements",
+      "Passive event listeners: {passive: true} for scroll/touch",
+      "Cleanup intervals/observers on page unload",
+      "Console error free",
+      "Support: Chrome, Firefox, Safari, Edge (last 2 versions)"
+    ],
+    "performance": [
+      "Throttle scroll events (16ms)",
+      "Use CSS transforms over left/top positioning",
+      "Lazy load images (loading='lazy')",
+      "Defer non-critical JS (DOMContentLoaded)"
+    ],
+    "output": "Complete <script> block at bottom of body, organized: Utils, Components (classes or factory functions), Init (DOMContentLoaded)"
+  }
+}
