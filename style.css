@@ -1294,9 +1294,24 @@ section:nth-of-type(even) { background: var(--surface); }
   .hero__content { align-items: center; text-align: center; }
   .hero__actions { justify-content: center; }
   .stats__grid   { grid-template-columns: 1fr 1fr; }
-  .teachers__grid { grid-template-columns: 1fr 1fr; }
   .gallery__grid  { columns: 1; }
   .hero__nav      { width: 36px; height: 36px; font-size: .8rem; }
+
+  /* Teacher cards — kotak simetris di 2-kolom */
+  .teachers__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+  }
+  .teacher__card {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .teacher__front,
+  .teacher__back  { padding: .875rem .75rem; }
+  .teacher__front img { width: 68px; height: 68px; }
+  .teacher__front h3  { font-size: .78rem; }
+  .teacher__back h3   { font-size: .82rem; }
+  .teacher__back p    { font-size: .72rem; line-height: 1.4; }
 }
 
 /* ── Print ── */
