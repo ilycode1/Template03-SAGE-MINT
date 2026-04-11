@@ -1282,9 +1282,25 @@ section:nth-of-type(even) { background: var(--surface); }
   /* Disable 3D tilt on touch devices */
   .card-3d { perspective: none; }
 
-  /* Teachers flip by click only — CSS hover is unreliable on touch */
-  .teacher__card:hover .teacher__front { transform: none; }
-  .teacher__card:hover .teacher__back  { transform: rotateY(180deg); }
+  /* Teachers: 2 kolom, tinggi proporsional */
+  .teachers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  /* tinggi = lebar kolom ≈ (viewport - 3rem padding - 1rem gap) / 2
+     Di 768px hasilnya sekitar 220px — cukup kotak */
+  .teacher__card { height: calc((100vw - 4rem) / 2); max-height: 240px; min-height: 180px; }
+  .teacher__front img   { width: 80px; height: 80px; }
+  .teacher__front,
+  .teacher__back        { padding: 1rem .75rem; }
+  .teacher__front h3    { font-size: .82rem; }
+  .teacher__back h3     { font-size: .85rem; }
+  .teacher__back p      { font-size: .75rem; line-height: 1.4; }
+  .teacher__back i      { font-size: 1.3rem !important; }
+
+  /* Teachers flip by click only — hover tidak reliable di touch */
+  .teacher__card:hover .teacher__front  { transform: none; }
+  .teacher__card:hover .teacher__back   { transform: rotateY(180deg); }
   .teacher__card.flipped .teacher__front { transform: rotateY(180deg); }
   .teacher__card.flipped .teacher__back  { transform: rotateY(0deg); }
 }
@@ -1297,21 +1313,22 @@ section:nth-of-type(even) { background: var(--surface); }
   .gallery__grid  { columns: 1; }
   .hero__nav      { width: 36px; height: 36px; font-size: .8rem; }
 
-  /* Teacher cards — kotak simetris di 2-kolom */
+  /* Teachers: tetap 2 kolom, tinggi mengikuti lebar kolom persis
+     Formula: (100vw - 3rem container - 1rem gap) / 2
+     480px → (480 - 48 - 16) / 2 = 208px ≈ kotak
+     375px → (375 - 48 - 16) / 2 = 155px ≈ kotak */
   .teachers__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: .75rem;
   }
-  .teacher__card {
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
+  .teacher__card { height: calc((100vw - 3rem - .75rem) / 2); max-height: 200px; min-height: 140px; }
+  .teacher__front img   { width: 60px; height: 60px; margin-bottom: .5rem; }
   .teacher__front,
-  .teacher__back  { padding: .875rem .75rem; }
-  .teacher__front img { width: 68px; height: 68px; }
-  .teacher__front h3  { font-size: .78rem; }
-  .teacher__back h3   { font-size: .82rem; }
-  .teacher__back p    { font-size: .72rem; line-height: 1.4; }
+  .teacher__back        { padding: .75rem .5rem; }
+  .teacher__front h3    { font-size: .72rem; }
+  .teacher__back h3     { font-size: .75rem; }
+  .teacher__back p      { font-size: .65rem; line-height: 1.35; }
+  .teacher__back i      { font-size: 1rem !important; }
 }
 
 /* ── Print ── */
